@@ -2,7 +2,7 @@ const selectRawFolderButton = document.getElementById('selectRawFolder');
 const rawFolderDisplay = document.getElementById('rawFolder');
 const selectJpgFolderButton = document.getElementById('selectJpgFolder');
 const jpgFolderDisplay = document.getElementById('jpgFolder');
-const processFoldersButton = document.getElementById('processFolders');
+const processFoldersButton = document.querySelector('.pushable');
 const syncResultDisplay = document.getElementById('syncResult');
 const deleteTempButton = document.getElementById('deleteTemp');
 const progressContainer = document.getElementById('progressContainer');
@@ -26,16 +26,18 @@ selectRawFolderButton.addEventListener('click', async () => {
   rawFolder = await window.electron.selectFolder();
   rawFolderDisplay.textContent = `Raw Folder: ${rawFolder}`;
   addAnimation(rawFolderDisplay, 'animate__fadeIn');
+  selectRawFolderButton.classList.add('selected');
 });
 
 selectJpgFolderButton.addEventListener('click', async () => {
   jpgFolder = await window.electron.selectFolder();
   jpgFolderDisplay.textContent = `JPG Folder: ${jpgFolder}`;
   addAnimation(jpgFolderDisplay, 'animate__fadeIn');
+  selectJpgFolderButton.classList.add('selected');
 });
 
 processFoldersButton.addEventListener('click', async () => {
-  progressContainer.classList.remove('hidden');
+  progressContainer.style.display = 'block';
   syncResultDisplay.textContent = '';
   progressBar.style.width = '0%';
   progressBar.textContent = '0%';
@@ -58,12 +60,13 @@ processFoldersButton.addEventListener('click', async () => {
   syncResultDisplay.textContent = response.message;
   addAnimation(syncResultDisplay, 'animate__fadeIn');
 
-  progressContainer.classList.add('hidden');
+  progressContainer.style.display = 'none';
 
   if (response.unmatchedRaw.length || response.unmatchedJpg.length) {
     deleteTempButton.classList.remove('hidden');
-    deleteTempButton.classList.add('bg-red-500', 'hover:bg-red-700');
     addAnimation(deleteTempButton, 'animate__fadeIn');
+  } else {
+    deleteTempButton.classList.add('hidden');
   }
 });
 
