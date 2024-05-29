@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photo Sync Tool</title>
+    <link href="output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../node_modules/animate.css/animate.min.css" />
+    <style>
+      .bg-slack-light {
+        background-color: #f8f9fa;
+      }
+      .text-slack-dark {
+        color: #1d1c1d;
+      }
+      .button-slack {
+        background-color: #007a5a;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .button-slack:hover {
+        background-color: #148567;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .button-delete {
+        background-color: #e02424;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .button-delete:hover {
+        background-color: #c41818;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body class="bg-slack-light flex items-center justify-center h-screen">
+    <div
+      class="bg-white p-8 rounded-lg shadow-lg w-96 animate__animated animate__fadeIn text-slack-dark"
+    >
+      <h1
+        class="text-2xl font-bold mb-4 text-center animate__animated animate__bounceInDown"
+      >
+        Photo Sync Tool
+      </h1>
+      <button
+        id="selectRawFolder"
+        class="button-slack text-white font-bold py-2 px-4 rounded w-full mb-2 animate__animated animate__pulse"
+      >
+        Select Raw Folder
+      </button>
+      <p id="rawFolder" class="text-gray-600 mb-4">Raw Folder: Not selected</p>
+      <button
+        id="selectJpgFolder"
+        class="button-slack text-white font-bold py-2 px-4 rounded w-full mb-2 animate__animated animate__pulse"
+      >
+        Select JPG Folder
+      </button>
+      <p id="jpgFolder" class="text-gray-600 mb-4">JPG Folder: Not selected</p>
+      <button
+        id="processFolders"
+        class="button-slack text-white font-bold py-2 px-4 rounded w-full animate__animated animate__pulse"
+      >
+        Process Folders
+      </button>
+      <p id="syncResult" class="text-gray-600 mt-4"></p>
+      <button
+        id="deleteTemp"
+        class="text-white font-bold py-2 px-4 rounded w-full mt-4 hidden animate__animated animate__pulse"
+      >
+        Delete Temp Files
+      </button>
+      <div id="progressContainer" class="hidden mt-4">
+        <div class="w-full bg-gray-300 rounded-full">
+          <div
+            id="progressBar"
+            class="bg-green-500 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
+            style="width: 0%"
+          >
+            0%
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="renderer.js"></script>
+  </body>
+</html>
